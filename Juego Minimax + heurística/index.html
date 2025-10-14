@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Matchstick — Minimax & Heurística</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1 class="title">⚖️ Matchstick — Minimax & Heurística</h1>
+      <p class="subtitle">Toma 1–3 palos. Quien toma el último palo <strong>pierde</strong>.</p>
+    </header>
+
+    <section class="game-panel">
+      <div class="controls card">
+        <div class="control-row">
+          <label for="startCount">Palos iniciales</label>
+          <input id="startCount" type="number" min="5" max="50" value="15" />
+          <button id="newGameBtn" class="btn primary">Nueva partida</button>
+        </div>
+
+        <div class="control-row">
+          <label>Jugar como:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="starter" value="player" checked/> Humano primero</label>
+            <label><input type="radio" name="starter" value="ai" /> IA primero</label>
+          </div>
+        </div>
+
+        <div class="control-row actions">
+          <button id="take1" class="btn">Tomar 1</button>
+          <button id="take2" class="btn">Tomar 2</button>
+          <button id="take3" class="btn">Tomar 3</button>
+        </div>
+
+        <div class="control-row small">
+          <button id="showTable" class="btn ghost">Mostrar tabla 1..20</button>
+          <button id="resetHistory" class="btn ghost">Limpiar historial</button>
+        </div>
+      </div>
+
+      <div class="play-area card">
+        <div class="status">
+          <div id="turnIndicator" class="pill">Turno: —</div>
+          <div id="sticksCount" class="big">—</div>
+        </div>
+
+        <div id="sticksContainer" class="sticks"></div>
+
+        <div class="info-grid">
+          <div class="info card small">
+            <h3>Heurística</h3>
+            <p id="heurText">—</p>
+            <small class="muted">Función: devuelve <code>1</code> si <code>palos % 4 == 0</code>, sino <code>-1</code>.</small>
+          </div>
+
+          <div class="info card small">
+            <h3>Minimax</h3>
+            <p id="minimaxText">—</p>
+            <small class="muted">Valor (1 = ventaja para quien tiene el turno, -1 = desventaja).</small>
+          </div>
+
+          <div class="info card small">
+            <h3>Movimiento sugerido</h3>
+            <p id="suggestedMove">—</p>
+            <small class="muted">Movimiento óptimo según Minimax.</small>
+          </div>
+
+          <div class="info card small">
+            <h3>Historial</h3>
+            <ul id="historyList" class="history"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tableModal" class="modal hidden">
+      <div class="modal-card">
+        <header class="modal-header">
+          <h2>Tabla Heurística vs Minimax (1..20)</h2>
+          <button id="closeTable" class="btn close">✕</button>
+        </header>
+        <div class="modal-body">
+          <table id="resultTable" class="result-table">
+            <thead>
+              <tr><th>Palos</th><th>Heurística</th><th>Minimax</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small>Diseño creativo • Minimax + heurística • Proyecto educativo</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
